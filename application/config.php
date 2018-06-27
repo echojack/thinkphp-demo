@@ -342,5 +342,5 @@ return [
         'pay_error' => 11,//支付失败
         'make_up' => 12,//补偿
     ],
-    'version' => 1.7,
+    'version' => 2.0,
 ];
