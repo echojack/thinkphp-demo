@@ -1,0 +1,142 @@
+{include file='common/header_css' /}
+<link href="__static__/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page-container">
+    <form method="post" class="form form-horizontal" id="submit_form">
+        <input type="hidden" name="uid" value="<?php if(isset($uid)) echo $uid; ?>">
+        <input type="hidden" name="user_uniq" value="<?php if(isset($user_uniq)) echo $user_uniq; ?>">
+        <div class="row cl">
+            <label class="form-label col-xs-2 col-sm-2">用户昵称：</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <?php if(isset($user)) echo $user['nick_name']; ?>
+            </div>
+            <label class="form-label col-xs-2 col-sm-2">用户角色：</label>
+            <div class="formControls col-xs-2 col-sm-2">
+                <span class="select-box">
+                <select name="group" class="select">
+                    <option value="0">请选择</option>
+                    {volist name="group_lists" id="vo"}
+                        <option value="{$vo['group_id']}" <?php if($user_group == $vo['group_id']) echo 'selected="selected"';?>>{$vo['group_name']}</option>
+                    {/volist}
+                </select>
+                </span>
+            </div>
+            <button class="btn btn-secondary radius submit" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+            <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+        </div>
+
+        <div class="row cl privilege"><label class="col-xs-12 col-sm-12 group"><div class="license" style="text-align: center;">请选选择用户角色</div></label></div>
+    </form>
+</div>
+{include file='common/footer_js' /}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+var user_mod = JSON.parse('<?php echo $user_mod;?>');
+var user_license = JSON.parse('<?php echo $user_license;?>');
+$(function(){
+    license_lists('<?php echo $user["group"];?>', '<?php echo $user["uid"];?>');
+    // 切换角色
+    $('select[name=group]').on('change', function(){
+        var group_id = $(this).val();
+        license_lists(group_id, 0);
+    });
+
+    // 添加
+    $('.submit').on('click', function(){
+        do_add();
+    });
+});
+// 添加圈子
+var do_add = function(){
+    // 操作按钮
+    var obj = $('.submit');
+    var _data = $('#submit_form').serialize();
+    ajax({
+        url: "<?php echo url('User/add_privilege');?>", 
+        data: _data, 
+        type:'POST',
+        before_text : '保存',
+        after_text : '保存中...',
+        success: function(res){
+            obj.prop('disabled',false).prop('value', '保存');
+            if(res.code == 1){
+                layer.msg(res.message, {icon:6,time:1000});
+            }else{
+                layer.msg(res.message, {icon:5,time:1000});
+            }
+            parent.location.href = "<?php echo url('User/admin_lists');?>"; 
+            var index = parent.layer.getFrameIndex(window.name);  
+            parent.layer.close(index); 
+        },
+        beforeSend:function(){
+            obj.prop('disabled',true).prop('value', '保存中...');
+        }
+    }, obj);
+}
+// 权限加载
+var license_lists = function(group_id, uid){
+    if(group_id == 0){
+        $('.privilege').html('<label class="col-xs-12 col-sm-12 group"><div class="license" style="text-align: center;">请选选择用户角色</div></label>');
+        return;
+    }
+    ajax({
+        url: "<?php echo url('User/get_objects');?>", 
+        data: {'group_id':group_id, 'uid':uid}, 
+        type:'POST',
+        success: function(res){
+            var list = res.data;
+            var shtml = '';
+            for (var i in list) {
+                shtml += '<label class="col-xs-2 col-sm-2 group">';
+                    shtml += '<div class="license">';
+                    if($.inArray(list[i]['m_id'], user_mod) != -1){
+                        shtml += '<label for="license-'+list[i]['m_id']+'" onclick="js_all_init(this)"><input type="checkbox" id="license-'+list[i]['m_id']+'" value="'+list[i]['m_id']+'" name="license[]" checked="true">'+list[i]['mod_name']+'</label>';
+                    }else{
+                        shtml += '<label for="license-'+list[i]['m_id']+'" onclick="js_all_init(this)"><input type="checkbox" id="license-'+list[i]['m_id']+'" value="'+list[i]['m_id']+'" name="license[]">'+list[i]['mod_name']+'</label>';
+                    }
+                    
+                    shtml += '</div>';
+                    var license = list[i]['license'];
+                    if(license.length){                        
+                        for (var k in license) {
+                            shtml += '<div class="object">';
+                            if($.inArray(license[k]['license_id'], user_license[list[i]['m_id']]) != -1){
+                                shtml += '<label for="object-'+license[k]['license_id']+'" onclick="js_single_init(this)"><input type="checkbox" id="object-'+license[k]['license_id']+'" value="'+license[k]['license_id']+'" name="object['+list[i]['m_id']+'][]" checked="true">'+license[k]['license_name']+'</label>';    
+                            }else{
+                                shtml += '<label for="object-'+license[k]['license_id']+'" onclick="js_single_init(this)"><input type="checkbox" id="object-'+license[k]['license_id']+'" value="'+license[k]['license_id']+'" name="object['+list[i]['m_id']+'][]">'+license[k]['license_name']+'</label>';
+                            }
+                            
+                            shtml += '</div>';
+                        }
+                    }else{
+                        shtml += '<div class="object">';
+                        shtml += '<label>暂无权限</label>';
+                        shtml += '</div>';
+                    }
+                shtml += '</label>';
+            }
+            $('.privilege').html(shtml);
+        },
+        beforeSend:function(){
+            $('.privilege').html('加载中...');
+        }
+    });
+}
+// 权限js 效果添加
+var js_single_init = function(obj){
+    $(obj).parents('.group').children('.license').children('label').children('input[type=checkbox]').prop('checked', true);
+}
+var js_all_init = function(obj){
+    var license_obj = $(obj).parents('.group').children('.object').children('label').children('input[type=checkbox]');
+    var is_checked = $(obj).children('input').prop('checked');
+    if(is_checked == true){
+        license_obj.prop('checked', true);
+    }else{
+        license_obj.prop('checked', false);
+    }
+}
+
+</script>
+</body>
+</html>

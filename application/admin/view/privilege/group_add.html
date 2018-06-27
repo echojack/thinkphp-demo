@@ -1,0 +1,75 @@
+{include file='common/header_css' /}
+<link href="__static__/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page-container">
+    <form method="post" class="form form-horizontal" id="submit_form">
+        <input type="hidden" name="group_id" value="<?php if(isset($group_id)) echo $group_id; ?>">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="<?php if(isset($group_name)) echo $group_name; ?>" placeholder="请输入分组名称" name="group_name">
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>栏目列表：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                {volist name="object" id="vo"}
+                    <input type="checkbox" id="checkbox-{$vo['m_id']}" value="{$vo['m_id']}" name="object[]" <?php if(isset($object_ids) && in_array($vo['m_id'], $object_ids)) echo 'checked';?> >
+                    <label for="checkbox-{$vo['m_id']}">{$vo['mod_name']}</label>
+                {/volist}
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-secondary radius submit" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+{include file='common/footer_js' /}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__static__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__static__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__static__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript" src="__static__/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript">
+$(function(){
+    // 添加
+    $('.submit').on('click', function(){
+        do_add();
+    });
+});
+// 添加圈子
+var do_add = function(){
+    // 操作按钮
+    var obj = $('.submit');
+    var _data = $('#submit_form').serialize();
+    ajax({
+        url: "<?php echo url('Privilege/group_add');?>", 
+        data: _data, 
+        type:'POST',
+        before_text : '保存',
+        after_text : '保存中...',
+        success: function(res){
+            obj.prop('disabled',false).prop('value', '保存');
+            if(res.code == 1){
+                layer.msg(res.message, {icon:6,time:1000});
+            }else{
+                layer.msg(res.message, {icon:5,time:1000});
+            }
+            parent.location.href = "<?php echo url('Privilege/group');?>"; 
+            var index = parent.layer.getFrameIndex(window.name);  
+            parent.layer.close(index); 
+        },
+        beforeSend:function(){
+            obj.prop('disabled',true).prop('value', '保存中...');
+        }
+    }, obj);
+}
+</script>
+</body>
+</html>

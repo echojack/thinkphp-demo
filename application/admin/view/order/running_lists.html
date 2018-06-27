@@ -1,0 +1,76 @@
+{include file='common/header' /}
+<!--_header 作为公共模版分离出去-->
+{include file='common/nav_top' /}
+<!--/_header 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去-->
+{include file='common/menu_left' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<!--/_menu 作为公共模版分离出去-->
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 流水明细列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <div>
+            <div class="pd-20">
+                <form method="GET" action="{:url('Order/running_lists')}">
+                    <div class="text-c"> 流水状态：
+                        <span class="select-box" style="width:100px">
+                            <select class="select" name="status" size="1">
+                                <option value="0" {eq name="@$_GET['status']" value="0"} selected="selected" {/eq}>全部</option>
+                                <option value="1" {eq name="@$_GET['status']" value="1"} selected="selected" {/eq}>待确认</option>
+                                <option value="2" {eq name="@$_GET['status']" value="2"} selected="selected" {/eq}>已确认待付款</option>
+                                <option value="3" {eq name="@$_GET['status']" value="3"} selected="selected" {/eq}>已付款</option>
+                                <option value="4" {eq name="@$_GET['status']" value="4"} selected="selected" {/eq}>已完成</option>
+                                <option value="7" {eq name="@$_GET['status']" value="7"} selected="selected" {/eq}>支付失败</option>
+                            </select>
+                        </span>
+                        用户ID：
+                        <span style="width:150px">
+                            <input type="text" placeholder="ID" style="width:150px" class="input-text" name="key" value="{$_GET['key']|default=''}">
+                        </span>
+                        <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                    </div>
+                </form>
+                <div class="cl pd-5 bg-1 bk-gray mt-20"> 
+                    <!--<span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量审核</a> &lt;!&ndash; <a class="btn btn-primary radius" onclick="product_add('添加产品','product-add.html')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a> &ndash;&gt;</span>-->
+                    <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-c">
+                                <th width="40"><input name="" type="checkbox" value=""></th>
+                                <th width="40">ID</th>
+                                <th width="40">交易金额</th>
+                                <th width="100">交易方式</th>
+                                <th width="200">流水分类</th>
+                                <th width="60">用户id</th>
+                                <th width="60">附加信息</th>
+                                <th width="60">时间</th>
+                                <th width="100">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='running_lists' id='vo'}
+                            <tr class="text-c va-m">
+                                <td><input name="" type="checkbox" value="{$vo['id']}"></td>
+                                <td>{$vo['id']}</td>
+                                <td>{$vo['money']}</td>
+                                <td class="text-l">{$vo['pay_type']}</td>
+                                <td class="text-l">{$vo['type']}</td>
+                                <td class="td-status">{$vo['uid']}</td>
+                                <td class="text-l">{$vo['options']}</td>
+                                <td class="text-l">{$vo['created_at']|date="Y-m-d H:i:s",###}</td>
+                                <td class="td-manage">
+                                </td>
+                            </tr>
+                            {/volist}
+                            {empty name="running_lists"}<tr><td colspan="6" style="text-align: center;">暂无数据</td></tr>{/empty}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{include file='common/footer' /}

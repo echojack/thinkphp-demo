@@ -1,0 +1,9 @@
+<form action="http://console.money.cc/index.php/api4/Circle/post" enctype="multipart/form-data" method="POST">
+    <input type="hidden" value="1.0" name="version" />
+    <input type="hidden" value="就是这么任性的标题" name="title" />
+    <input type="hidden" value="就是这么任性" name="content" />
+    <input type="hidden" name="token" value="<?php echo $_GET['token'];?>"/>
+    <p>First name: <input type="file" name="images[]" /></p>
+    <p>First name: <input type="file" name="images[]" /></p>
+    <input type="submit" value="Submit" />
+</form>

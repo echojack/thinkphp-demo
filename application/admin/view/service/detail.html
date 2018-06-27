@@ -1,0 +1,109 @@
+{include file='common/header_css' /}
+</head>
+<body>
+<div class="pd-20">
+    <div class="detail">
+        <table class="table table-border table-bordered table-hover">
+            <tr>
+                <td class="col-xs-2">状态</td>
+                <td class="col-xs-10">
+                    {switch name="$status"}
+                        {case value="1"}<span class="label label-success radius">审核通过</span>{/case}
+                        {case value="2"}<span class="label label-danger radius">待审核</span>{/case}
+                        {case value="3"}<span class="label disabled radius">已关闭</span>{/case}
+                        {case value="4"}<span class="label label-warning radius">已拒绝</span>{/case}
+                        {default /}
+                    {/switch}
+                </td>
+            </tr>
+<!--             <tr>
+                <td class="col-xs-2">分类</td>
+                <td class="col-xs-10">
+                {switch name="parents_category"}
+                    {case value="1"}生活方式{/case}
+                    {case value="2"}技能分享{/case}
+                    {default/}
+                {/switch}
+                </td>
+            </tr> -->
+            <tr>
+                <td class="col-xs-2">标题</td>
+                <td class="col-xs-10">{$title}</td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">时间</td>
+                <td class="col-xs-10">{$time_txt}</td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">价格</td>
+                <td class="col-xs-10">{$price}/小时</td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">服务范围</td>
+                <td class="col-xs-10">
+                    {volist name="categorys" id="vo"}
+                        <span class="label label-error radius">{$vo['value']}</span>
+                    {/volist}
+                </td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">服务介绍</td>
+                <td class="col-xs-10">{$intro}</td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">服务图片</td>
+                <td class="col-xs-10">
+                    {volist name="attaches" id="img_url"}
+                        <img width="60" class="product-thumb" src="{$img_url}">
+                    {/volist}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    {eq name="status" value="2"}
+                        <a href="javascript:;" onclick="audit({$id}, 4, this)" class="btn btn-danger radius">审核拒绝</a>
+                        <a href="javascript:;" onclick="audit({$id}, 1, this)" class="btn btn-success radius">审核通过</a>
+                    {/eq}
+                    {eq name="status" value="1"}
+                        <a href="javascript:;" onclick="audit({$id}, 4, this)" class="btn btn-danger radius">审核拒绝</a>
+                    {/eq}
+                    {eq name="status" value="4"}
+                        <a href="javascript:;" onclick="audit({$id}, 1, this)" class="btn btn-success radius">审核通过</a>
+                    {/eq}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var audit = function(id, status, _this){
+        if(status == 1){
+            var tips = '确认审核通过？操作后将不能修改！';
+        }else if(status == 4){
+            var tips = '确认审核拒绝？操作后将不能修改！';
+        }
+
+        var obj = $(_this);
+        layer.confirm(tips,function(index){
+            ajax({
+                url: "<?php echo url('Service/audit');?>", 
+                data: {'id':id, 'status':status}, 
+                type:'POST',
+                before_text : '审核通过',
+                after_text : '审核中...',
+                success: function(res){
+                    if(res.code == 1){
+                        layer.msg(res.message, {icon:6,time:1000});
+                    }else{
+                        layer.msg(res.message, {icon:5,time:1000});
+                    }
+                    parent.location.href = "<?php echo url('Service/lists');?>"; 
+                    var index = parent.layer.getFrameIndex(window.name);  
+                    parent.layer.close(index); 
+                }
+            }, obj);
+        });
+        
+    }
+</script>
+{include file='common/footer' /}

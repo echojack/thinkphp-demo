@@ -1,0 +1,480 @@
+body{font-size: 1.5rem;color: #333;}
+div,span,em, h2{display: inline-block;}
+/*顶部背景图*/
+ .top .bg{display: inline-block;width: 100%;}
+ .top img{width: 100%;height: 37rem;}
+/*卡片位置*/
+.service #card{
+    display: block;
+    position: absolute;
+    width: 94%;
+    height: 8rem;
+    margin: 0 3%;
+    box-shadow: 0.4rem 0.4rem 0.4rem #F0F0F0;
+    top: 36rem;
+    background-color: white;
+    border-radius: 0.4rem;
+}
+/*卡片布局信息*/
+#card div{
+   display: inline-block;float: left;
+}
+#card img{width: 6rem;height: 6rem;margin: 1rem;}
+
+#card .info span{
+    width: 100%;
+    line-height: 1.8rem;
+}
+#card .nick_name{
+    margin-top: 2rem;
+    padding-left: 1rem;
+}
+#card .age{
+    width: 2.6rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+    background-color: #6BC9FF;
+    color: white;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    padding: 0 0.2rem;
+    border-radius: 0.2rem;
+}
+#card .distince{
+    font-size: 1.4rem;
+    color: #666;
+}
+#card .distince img{
+    width: 1.2rem;
+    height: 1.4rem;
+}
+/*音频文件样式*/
+.sounds{
+    margin:1rem 1rem;
+    background-color: white;
+    width: 17rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 2rem;
+    border: 1px solid #ff8597;
+    color: #ff8597;
+}
+
+/*服务介绍*/
+.service .intro{
+    margin-top: 9rem;
+}
+/*标题*/
+.service h2{
+    display: block;
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0 1rem;
+}
+/*时间*/
+.service .intro .times, .service .intro2 .times{
+    display: block;
+    font-size: 1.4rem;
+    line-height: 3.4rem;
+    color: #666;
+    margin: 0 1rem;
+}
+/*分类*/
+.service .intro .categorys{
+    margin:1rem 1rem;
+    background-color: #ffebee;
+    width: 6rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 2rem;
+}
+/*服务介绍*/
+.service .intro2 {
+    margin-top: 3rem;
+}
+
+/*分类*/
+.service .intro2 .categorys{
+    margin:1rem 1rem;
+    background-color: #ffebee;
+    width: 90%;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 2rem;
+}
+.service .intro2 p{
+    display: block;
+    margin:0 1rem;
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+    color: #666;
+    padding-bottom: 2rem;
+}
+/*间隔div*/
+.tab_div{display: block;height: 2rem;background-color: #f8f8f8;}
+/*评论区域*/
+.service .comments{
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: #666;
+}
+
+.service .comments ul li{
+    display:block;
+    border: none;
+    margin: 0 1rem;
+}
+
+.service .comments img{
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 1.3rem;
+    margin-top: 1.3rem;
+    margin-right: 0.8rem;
+}
+
+.service .comments .times{
+    float: right;
+    font-size: 1.2rem;
+    color: #333;
+}
+.service .comments .content{
+    font-size: 1.4rem;
+    color: #333;
+    padding-left: 4rem;
+}
+.service .star_box {
+    padding-left: 4rem;
+}
+
+/*邀约详情*/
+.demand .title{
+    padding: 0 1rem;
+}
+.demand .title em{
+    margin: 1rem 0;
+}
+.demand .top h2{
+    display: block;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+    color: #333;
+}
+
+/*卡片位置*/
+.demand #card{
+    display: inline-block;
+    width: 94%;
+    height: 8rem;
+    margin: 1rem 3%;
+    background-color: white;
+    border:1px dashed #CCC;
+    border-left: none;
+    border-right: none;
+}
+/*li*/
+.demand .intro2 ul li{
+    margin: 0 1.5rem;
+    vertical-align: middle;
+    font-size: 1.4rem;
+}
+.demand .intro2 img{
+    display: inline-block;
+    margin: 0.5rem 1rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+
+
+/*用户个人主页*/
+.user  .top img{
+    width: 100%;
+    height: 20rem;
+}
+
+/*卡片位置*/
+.user #user_card{
+    display: block;
+    position: absolute;
+    width: 94%;
+    height: 14rem;
+    margin: 0 3%;
+    box-shadow: 0.4rem 0.4rem 0.4rem #F0F0F0;
+    top: 17rem;
+    background-color: white;
+    border-radius: 0.4rem;
+}
+/*卡片布局信息*/
+#user_card div{
+   display: inline-block;float: left;
+}
+#user_card img{width: 6rem;height: 6rem;margin: 1rem;float: left;}
+
+#user_card .info span{
+    width: 100%;
+    line-height: 1.8rem;
+}
+#user_card .nick_name{
+    margin-top: 2rem;
+    padding-left: 1rem;
+}
+#user_card .age{
+    width: 2.6rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+    background-color: #6BC9FF;
+    color: white;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    padding: 0 0.2rem;
+    border-radius: 0.2rem;
+}
+#user_card .intro{
+    font-size: 1.4rem;
+    color: #666;
+    padding-left: 1rem;
+}
+/*关注 粉丝 按钮*/
+#user_card .data{
+    display: inline-block;
+    width: 100%;
+    padding: 0 1rem;
+}
+#user_card .data span{
+    width: 19%;
+    float: left;
+    margin: 0 0.5rem;
+}
+#user_card .data em{
+    display: block;
+    text-align: center;
+}
+#user_card .data em:first-child{
+    font-size: 1.8rem;
+    color: #333;
+    line-height: 2.8rem;
+}
+#user_card .data em:last-child{
+    font-size: 1.4rem;
+    color: #666;
+    line-height: 2.4rem;
+}
+/*聊天 加关注*/
+#user_card .follow{
+    display: inline-block;
+    width: 5rem;
+    height: 3.5rem;
+    background-color: #ff758b;
+    font-size: 1.3rem;
+    color: #fff;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+#user_card .chat{
+    display: inline-block;
+    width: 5rem;
+    height: 3.5rem;
+    background-color: #FDAB95;
+    font-size: 1.3rem;
+    color: #fff;
+    line-height: 3.5rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+/*他的服务*/
+.user .service{
+    margin-top: 15rem;
+}
+.user .service div,.user .demand div,.user ul li{
+    float: left;
+}
+
+/*左侧文字样式*/
+.user .left .type{
+    display: block;
+    font-size: 1.8rem;
+    color: #ccc;
+    line-height: 4rem;
+    text-align: center;
+}
+.user .left .count{
+    display: block;
+    font-size: 4rem;
+    color: #ccc;
+    text-align: center;
+}
+.user .left{
+    width: 30%;
+    margin:0 0.2rem;
+}
+
+.user .right,.user .info{
+    width: 59%;
+}
+
+.user .right img{
+    width: 7rem;
+    height: 8rem;
+    margin: 0.4rem;
+}
+/*资料信息*/
+.user .info{
+    padding-top: 1rem;
+    box-shadow: 0.4rem 0.4rem 0.4rem #F0F0F0;
+    margin-bottom: 2rem;
+}
+.user .info ul li{
+    display: block;
+    width: 100%;
+    height: 2rem;
+}
+.user .info span:first-child{
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #999;
+    width: 40%;
+}
+.user .info span:last-child{
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #333;
+    width: 60%;
+}
+
+/*TA的标签*/
+.user .tags li{
+    width: 8rem;
+    height: 3.5rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    text-align: center;
+    line-height: 3.5rem;
+    margin: 0.2rem;
+    box-shadow: 0.4rem 0.4rem 0.4rem #F0F0F0;
+}
+
+/*--------------------------公用底部下载---------------------------------*/
+.download .relative{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 7rem;
+    bottom: 0;
+    z-index: 2;
+}
+/*icon控制*/
+.download .icon{
+    float: left;
+    width: 4.5rem;
+    height: 4.5rem;
+    background-image: url(../images/logo60.png);
+    background-repeat: no-repeat;
+    background-size: 4.5rem;
+    margin: 1rem;
+}
+/*文字简介*/
+.download section{
+    display: inline-block;
+    color: white;
+    width: 45%;
+}
+.download h3{
+    font-size: 1.6rem;
+    margin: 1rem;
+}
+.download p{
+    font-size: 1.4rem;
+    line-height:1.6rem;
+    margin: 1rem;
+}
+/*下载按钮*/
+.download .btn{
+    display: inline-block;
+    border-radius: 1.6rem;
+    color: #fff;
+    background-color: #ff6666;
+    font-size: 1.6rem;
+    padding: 0.6rem 1.2rem;
+    position:absolute;
+    top:1rem;
+    right:1.2rem;
+}
+
+/*星星*/
+.star2{
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background:url(../images/icon/star2.png) no-repeat center;
+    background-size: cover;
+}
+.star1{
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background:url(../images/icon/star1.png) no-repeat center;
+    background-size: cover;
+}
+/*服务footer*/
+footer{
+    margin-bottom: 8rem;
+}
+
+/*帖子用户信息样式*/
+.posts_user{width: 99%;padding-left: 0.2rem;}
+.posts_user div{display: inline-block; float: left;}
+.posts_user div span:first-child{display:block;vertical-align: middle;line-height: 1.4rem;color: #aaa;padding-left: 1rem;}
+.posts_user div span:last-child{display:block;vertical-align: middle;line-height: 1.3rem;color: #666;margin-top: 0.7rem;padding-left: 1rem;}
+.posts_user div img{width: 3.2rem;height: 3.2rem;border-radius: 4rem;}
+/*关注按钮*/
+.gz_btn{float: right;color: white;width: 5rem;height: 2.4rem;background-color: #ff758b;text-align: center;line-height: 2.4rem;border-radius: 1.2rem;margin-right: 1.5rem;} 
+/*点赞按钮*/
+.like_btn{float: right;color: #aaa;line-height: 2.4rem;margin-right: 1.5rem;background-image: url('../images/icon/digg.png');background-repeat: no-repeat;padding-left: 2.5rem;} 
+/*评论按钮*/
+.comment_count{float: right;color: #aaa;line-height: 2.4rem;margin-right: 1.5rem;background-image: url('../images/icon/comment.png');background-repeat: no-repeat;padding-left: 2.5rem;} 
+
+/*帖子详情样式*/
+.posts h2{display: block;text-align: center;margin: 1rem 0;}
+/*详细内容*/
+.posts .content{width: 90%;margin-top: 0.5rem;font-size: 1.6rem; color: #333;line-height: 2rem;text-indent: 2rem;padding:0 1rem 1rem 1rem;}
+.posts .content img{width: 100%;margin: 0.6rem 0;border-radius: 1.8rem;}
+.posts .like{margin: 2rem 0;color: #aaa;}
+.posts .like img{width: 3rem;height: 3rem;border-radius: 2rem;}
+/*分隔线*/
+.posts .fenge{display: block;width: 100%;background-color: #e1e1e1;height: 1rem;}
+/*评论列表*/
+.posts .comments{display: block;width: 90%;}
+.posts .comments h2{text-align: left;padding-left: 2rem;}
+.posts .comments ul{}
+.posts .comments ul li{margin:1rem; border-bottom: 0.1rem solid #e1e1e1;padding: 1rem;}
+.posts .comments .content{width: 90%;margin-top: 0.5rem;font-size: 1.6rem; color: #333;line-height: 2rem;padding-left: 4.5rem;text-indent: 0;}
+/*评论楼层*/
+.posts .comments ul ul{background-color: #f6f4f4;}
+.posts .comments ul ul li{margin:1rem; border-bottom: 0.1rem solid #e1e1e1;padding: 1rem;}
+.posts .comments ul ul li:last-child{margin:1rem; border-bottom: none;padding: 1rem;}
+.posts .comments .content .user em{color: #0c6cf2;}
+.posts .comments .content .content{padding-left: 0;}
+.posts .comments .content .content em{float: right;}
+/*广告详情页面*/
+.ads h2{display: block;text-align: center;margin: 1rem 0;}
+.ads .content{padding: 1.5rem;}
+/*话题详情页面分享*/
+.topic .img{text-align: center;margin: 1.4rem 0;}
+.topic .img img{width: 98%;height: 14rem;text-align: center;border-radius: 2rem;}
+
+.topic .title{position: absolute;left: 0;width: 99%;}
+.topic .title h2{display: block;color: white;margin-top: 4rem;}
+.topic .title span{color: white;margin:1rem 1rem 0 1rem;}
+/*话题讨论*/
+.topic .comments{display: block;width: 99%;}
+.topic .comments h2{text-align: left;padding-left: 2rem;}
+.topic .comments ul{}
+.topic .comments ul li{margin:1rem; border-bottom: 0.1rem solid #e1e1e1;padding: 1rem;}
+.topic .comments .content{width: 90%;margin-top: 0.5rem;font-size: 1.6rem; color: #333;line-height: 2rem;padding-left: 4.5rem;text-indent: 0;}
+.topic .comments .content img{width: 40%;height: 8rem;margin: 0.4rem 0.2rem;}

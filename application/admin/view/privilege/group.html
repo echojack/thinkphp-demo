@@ -1,0 +1,81 @@
+{include file='common/header' /}
+<!--_header 作为公共模版分离出去-->
+{include file='common/nav_top' /}
+<!--/_header 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去-->
+{include file='common/menu_left' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<!--/_menu 作为公共模版分离出去-->
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <div>
+            <div class="pd-20">
+                <div class="cl pd-5 bg-1 bk-gray mt-20"> 
+                    <span class="l"> <a class="btn btn-primary radius" onclick="add()" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加角色</a></span>
+                    <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-c">
+                                <th width="40"><input name="" type="checkbox" value=""></th>
+                                <th width="40">ID</th>
+                                <th width="100">分组名称</th>
+                                <th width="100">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='lists' id='vo'}
+                                <tr class="text-c va-m">
+                                    <td><input name="" type="checkbox" value="{$vo['group_id']}"></td>
+                                    <td>{$vo['group_id']}</td>
+                                    <td>{$vo['group_name']}</td>
+                                    <td class="td-manage">
+                                        <a class="ml-5" onClick="add({$vo['group_id']})" href="javascript:;" title="编辑">编辑</a>
+                                        <a class="ml-5" onClick="del({$vo['group_id']})" href="javascript:;" title="删除">删除</a>
+                                    </td>
+                                </tr>
+                            {/volist}
+                            {empty name="lists"}<tr><td colspan="7" style="text-align: center;">暂无数据</td></tr>{/empty}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script type="text/javascript">
+// edit
+var add = function(group_id){
+    var url = '<?php echo url("Privilege/group_add")?>?group_id='+group_id;
+    var index = layer.open({
+        type: 2,
+        title: '添加分组',
+        content: url
+    });
+    layer.full(index);
+}
+// del
+var del = function(group_id){
+    layer.confirm('确认删除', {icon: 3, title:'提示'}, function(index){
+      // 操作按钮
+        ajax({
+            url: "<?php echo url('Privilege/group_del');?>", 
+            data: {'group_id':group_id}, 
+            type:'POST',
+            success: function(res){
+                if(res.code == 1){
+                    layer.msg(res.message, {icon:6,time:1000});
+                    location.href = '<?php echo url("Privilege/group");?>';
+                }else{
+                    layer.msg(res.message, {icon:5,time:1000});
+                }
+            }
+        });
+        layer.close(index);
+    });
+}
+</script>
+{include file='common/footer' /}

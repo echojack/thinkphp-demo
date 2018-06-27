@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>个人主页</title>
+<meta name="keywords" content="在吗">
+<meta name="description" content="在吗-个人主页">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, email=no">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="__static__/assets/css/reset.css?t=<?php echo time();?>"/>
+<link rel="stylesheet" href="__static__/assets/css/user.css?t=<?php echo time();?>"/>
+</head>
+<body>
+    <!-- 背景 头像 -->
+    <section class="zm_user">
+        <img class="bg" src="{$user_bg}">
+        <div class="avatar">
+            <img src="{$avatar}" />
+        </div>
+    </section>
+    <!-- 昵称签名 -->
+    <section class="zm_user">
+        <h2>{$nick_name}</h2>
+        <p>{$birthday}<span>{$age}</span></p>
+        <p class="intro">{$intro}</p>
+    </section>
+    <!-- 邀约 -->
+    <section class="zm_user">
+        <div class="left">
+            <p class="title">TA的邀约</p>
+            <p class="count">{$demand_count}</p>
+        </div>
+        <div class="right">
+            {if $demand}
+                <ul class="list">
+                    {volist name="demand" id="vo"}
+                        <img src="{$vo.category_icon}"><li>{$vo.title}</li>
+                    {/volist}
+                    <li>查看更多</li>
+                </ul>
+            {/if}
+        </div>
+    </section>
+    <!-- 服务 -->
+    <section class="zm_user">
+        <div class="left">
+            <p class="title">TA的服务</p>
+            <p class="count">{$service_count}</p>
+        </div>
+        <div class="right">
+            {if $service}
+                <ul class="list">
+                    {volist name="service" id="vo"}
+                        <img src="{$vo.category_icon}"><li>{$vo.title}</li>
+                    {/volist}
+                    <li>查看更多>></li>
+                </ul>
+            {/if}
+        </div>
+    </section>
+    <!-- 标签 -->
+    <section class="zm_user">
+        <div class="left">
+            <p class="title">TA的标签</p>
+            <p class="count">{$tags_count}</p>
+        </div>
+        <div class="right">
+            <ul class="tags">
+                {volist name="tags" id="vo"}
+                    <li>{$vo.value}</li>
+                {/volist}
+            </ul>
+        </div>
+    </section>
+    <!-- 底部下载 -->
+    <section class="download">
+        <div class='relative'>
+            <a href='javascript:;' class='icon'></a>
+            <section class='intro'>
+                <h3>在吗</h3>
+                <p>更好的线下交友平台APP</p>
+            </section>
+            <a href='javascript:;' class='btn'>免费下载</a>
+        </div>
+    </section>
+</body>
+</html>

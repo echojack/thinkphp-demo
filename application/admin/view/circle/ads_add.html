@@ -1,0 +1,182 @@
+{include file='common/header_css' /}
+<link href="__static__/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page-container">
+    <form method="post" class="form form-horizontal" id="submit_form">
+        <input type="hidden" name="posts_id" value="{$posts_id|default=0}">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>广告名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$title|default=''}" placeholder="请输入广告名称" name="title">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">广告图片：<input type="hidden" name="attaches" value="{$attaches_path['0']|default=''}"></label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <!--dom结构部分-->
+                <div id="uploader-thum-container">
+                    <!--用来存放item-->
+                    <div id="fileList" class="uploader-list">
+                        <div id="WU_FILE_0" class="file-item thumbnail"><img src="{$logo|default='__static__/images/default_image.png'}" style="width: 100px;height: 100px;"></div>
+                    </div>
+                    <div id="filePicker">选择图片</div>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">广告描述：</label>
+            <div class="formControls col-xs-8 col-sm-9"> 
+                <script id="editor" type="text/plain" style="width:100%;height:400px;" name="content"><?php echo @$content;?></script> 
+            </div>
+            <!-- <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="content" class="textarea"  placeholder="说点什么..." datatype="*10-100" dragonfly="true" nullmsg="圈子描述不能为空！"></textarea>
+            </div> -->
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-secondary radius submit" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+{include file='common/footer_js' /}
+<!--请在下方写此页面业务相关的脚本-->
+<!-- <script type="text/javascript" src="__static__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__static__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__static__/lib/jquery.validation/1.14.0/messages_zh.js"></script>  -->
+<script type="text/javascript" src="__static__/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="__static__/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__static__/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__static__/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+$(function(){
+    // 编辑器初始化
+    var ue = UE.getEditor('editor');
+    // UE.setContent('');
+    upload();
+    // 添加
+    $('.submit').on('click', function(){
+        circle_add();
+    });
+});
+// 上传圈子logo
+var upload = function(){
+    // 初始化Web Uploader
+    var uploader = WebUploader.create({
+        // 选完文件后，是否自动上传。
+        auto: true,
+        // swf文件路径
+        swf: '__static__/lib/webuploader/0.1.5/Uploader.swf',
+
+        // 文件接收服务端。
+        server: '<?php echo url('Upload/image');?>',
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: {
+            id: '#filePicker',
+            label: '点击选择图片'
+        },
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,png',
+            mimeTypes: 'image/*'
+        },
+        fileSingleSizeLimit: 2 * 1024 * 1024,//2M
+    });
+    // 当有文件添加进来的时候
+    uploader.on( 'fileQueued', function( file ) {
+        var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<img>' +
+                    '<div class="info">' + file.name + '</div>' +
+                '</div>'
+                ),
+            $img = $li.find('img');
+        // $list为容器jQuery实例
+        $("#fileList").html( $li );
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb( file, function( error, src ) {
+            if ( error ) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+            $img.attr( 'src', src );
+        }, 100, 100 );
+    });
+
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress span');
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<p class="progress" style="width:100px;"><span></span></p>')
+                    .appendTo( $li )
+                    .find('span');
+        }
+
+        $percent.css( 'width', percentage * 100 + '%' );
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file ,msg) {
+        var $li = $( '#'+file.id ),
+            $info = $li.find('div.info');
+            $info.text('上传成功');
+        var path = msg.data.save_path+msg.data.save_name;
+        $('input[name=attaches]').prop('value', path);
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on( 'uploadError', function( file ) {
+        var $li = $( '#'+file.id ),
+            $error = $li.find('div.error');
+
+        // 避免重复创建
+        if ( !$error.length ) {
+            $error = $('<div class="error"></div>').appendTo( $li );
+        }
+
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').remove();
+    });
+}
+// 添加圈子
+var circle_add = function(){
+    // 操作按钮
+    var obj = $('.submit');
+    var _data = $('#submit_form').serialize();
+    ajax({
+        url: "<?php echo url('Circle/ads_add');?>", 
+        data: _data, 
+        type:'POST',
+        before_text : '保存',
+        after_text : '保存中...',
+        success: function(res){
+            obj.prop('disabled',false).prop('value', '保存');
+            if(res.code == 1){
+                layer.msg(res.message, {icon:6,time:1000});
+            }else{
+                layer.msg(res.message, {icon:5,time:1000});
+            }
+            parent.location.href = "<?php echo url('Circle/lists_ads');?>"; 
+            var index = parent.layer.getFrameIndex(window.name);  
+            parent.layer.close(index); 
+        },
+        beforeSend:function(){
+            obj.prop('disabled',true).prop('value', '保存中...');
+        }
+    }, obj);
+}
+</script>
+</body>
+</html>

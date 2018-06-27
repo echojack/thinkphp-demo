@@ -1,0 +1,112 @@
+{include file='common/header' /}
+<!--_header 作为公共模版分离出去-->
+{include file='common/nav_top' /}
+<!--/_header 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去-->
+{include file='common/menu_left' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<!--/_menu 作为公共模版分离出去-->
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 日志管理 <span class="c-gray en">&gt;</span> 后台日志 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <div>
+            <div class="pd-20">
+               <!--  <form method="GET" action="{:url('Service/lists')}">
+                    <div class="text-c"> 服务状态：
+                        <span class="select-box" style="width:100px">
+                            <select class="select" name="status" size="1">
+                                <option value="0" selected>全部</option>
+                                <option value="2">待审核</option>
+                                <option value="1">审核通过</option>
+                                <option value="4">审核拒绝</option>
+                                <option value="3">已关闭</option>
+                            </select>
+                        </span>
+                        <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
+                    </div>
+                </form> -->
+                <div class="cl pd-5 bg-1 bk-gray mt-20"> 
+                    <span class="l"><!-- <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量审核</a> --> </span>
+                    <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-c">
+                                <th width="40"><input name="" type="checkbox" value=""></th>
+                                <th width="40">用户ID</th>
+                                <th width="100">用户名</th>
+                                <th width="100">日志类型</th>
+                                <th width="40">资源id</th>
+                                <th width="100">资源类型</th>
+                                <!-- <th width="100">备注</th> -->
+                                <th width="100">登录IP</th>
+                                <th width="40">结果</th>
+                                <th width="100">创建时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='lists' id='vo'}
+                            <tr class="text-c va-m">
+                                <td><input name="" type="checkbox" value="{$vo['id']}"></td>
+                                <td>{$vo['user_id']}</td>
+                                <td class="text-l">{$vo['user_name']}</td>
+                                <td class="text-c">
+                                <!-- 操作类型（1：增加，2：删除，3：修改，4：登录，9：其他） -->
+                                    {switch name="$vo['action_type']"}
+                                        {case value="1"}增加{/case}
+                                        {case value="2"}删除{/case}
+                                        {case value="3"}修改{/case}
+                                        {case value="4"}登录{/case}
+                                        {case value="9"}其他{/case}
+                                        {default /}
+                                    {/switch}
+                                </td>
+
+                                <td class="text-l">{$vo['source_id']}</td>
+                                <td class="text-c">
+                                <!-- 资源类型（1：登录；2:退出；3：服务；4：邀约；5：圈子帖子/动态；6：评论；） -->
+                                    {switch name="$vo['source_type']"}
+                                        {case value="1"}登录{/case}
+                                        {case value="2"}退出{/case}
+                                        {case value="3"}服务{/case}
+                                        {case value="4"}邀约{/case}
+                                        {case value="5"}圈子帖子/动态{/case}
+                                        {case value="6"}评论{/case}
+                                        {default /}
+                                    {/switch}
+                                </td>
+                                <!-- <td class="text-l">{$vo['remark']}</td> -->
+                                <td class="text-l">{$vo['login_ip']}</td>
+                                <td class="text-c">
+                                    {switch name="$vo['is_suc']"}
+                                        {case value="1"}成功{/case}
+                                        {case value="0"}失败{/case}
+                                        {default /}
+                                    {/switch}
+                                </td>
+                                <td class="text-l">{$vo['created_time']|date="Y-m-d H:i:s", ###}</td>
+                                
+                            </tr>
+                            {/volist}
+                            {empty name="lists"}<tr><td colspan="9" style="text-align: center;">暂无数据</td></tr>{/empty}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script type="text/javascript">
+    var detail = function(id){
+        var url = '<?php echo url("Service/detail")?>'+'?id='+id+'&page='+'<?php echo @$_REQUEST["page"]?>';
+        var index = layer.open({
+            type: 2,
+            title: '服务详情',
+            content: url
+        });
+        layer.full(index);
+    }
+</script>
+{include file='common/footer' /}

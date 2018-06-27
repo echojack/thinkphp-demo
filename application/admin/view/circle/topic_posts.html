@@ -1,0 +1,94 @@
+{include file='common/header' /}
+<!--_header 作为公共模版分离出去-->
+{include file='common/nav_top' /}
+<!--/_header 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去-->
+{include file='common/menu_left' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<!--/_menu 作为公共模版分离出去-->
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 圈子管理 <span class="c-gray en">&gt;</span> 帖子列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <div>
+            <div class="pd-20">
+                <form method="GET" action="{:url('Circle/topic_posts')}">
+                    <div class="text-c"> 所属话题：
+                        <span class="select-box" style="width:100px">
+                            <select class="select" name="circle_id" size="1">
+                                <option value="0">全部</option>
+                                {volist name="circle_list" id="vo"}
+                                    <?php if($vo['circle_id'] == @$_REQUEST['circle_id']):?>
+                                        <option value="{$vo['circle_id']}" selected="selected">{$vo['title']}</option>
+                                    <?php else:?>
+                                        <option value="{$vo['circle_id']}">{$vo['title']}</option>
+                                    <?php endif;?>
+                                {/volist}
+                            </select>
+                        </span>
+                        <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                    </div>
+                </form>
+                <div class="cl pd-5 bg-1 bk-gray mt-20"> 
+                    <!-- <span class="l"><a class="btn btn-primary radius" onclick="ads_add()" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 发布帖子</a></span> -->
+                    <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-c">
+                                <th width="40"><input name="" type="checkbox" value=""></th>
+                                <th width="40">ID</th>
+                                <th width="100">图片</th>
+                                <th width="200">动态描述</th>
+                                <th width="100">所属话题</th>
+                                <th width="100">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='lists' id='vo'}
+                            <tr class="text-c va-m">
+                                <td><input name="" type="checkbox" value="{$vo['posts_id']}"></td>
+                                <td>{$vo['posts_id']}</td>
+                                <td class="text-c">
+                                {php}if($vo['attaches']) echo '<img src="'.$vo['attaches']['0'].'" style="width: 100px;height: 100px;">';{/php}
+                                </td>
+                                <td class="text-l">{$vo['content']|truncate_utf8_string=###, 20}</td>
+                                <td class="text-c">{$vo['circle']['title']}</td>
+                                <td class="td-manage">
+                                    <a class="ml-5" onClick="del({$vo['posts_id']})" href="javascript:;" title="删除">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            {empty name="lists"}<tr><td colspan="7" style="text-align: center;">暂无数据</td></tr>{/empty}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script type="text/javascript">
+// 审核话题
+var del = function(id){
+    var tips = '确定删除动态？';
+    layer.confirm(tips, {icon: 3, title:'提示'}, function(index){
+      // 操作按钮
+        ajax({
+            url: "<?php echo url('Circle/is_del');?>", 
+            data: {'id':id}, 
+            type:'POST',
+            success: function(res){
+                if(res.code == 1){
+                    layer.msg(res.message, {icon:6,time:1000});
+                    location.href = '<?php echo url("Circle/topic_posts");?>?page='+'<?php echo @$_REQUEST["page"]?>';
+                }else{
+                    layer.msg(res.message, {icon:5,time:1000});
+                }
+            }
+        });
+        layer.close(index);
+    });
+}
+</script>
+{include file='common/footer' /}

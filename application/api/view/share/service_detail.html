@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>服务详情</title>
+<meta name="keywords" content="在吗">
+<meta name="description" content="在吗-服务详情">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, email=no">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="__static__/assets/css/reset.css?t=<?php echo time();?>"/>
+<link rel="stylesheet" href="__static__/assets/css/user.css?t=<?php echo time();?>"/>
+</head>
+<body>
+    <!-- 背景 头像 -->
+    <section class="zm_service">
+        <div>
+          <img src="{$attaches['0']}" class="bg" />  
+        </div>
+        <div class="card">
+            <div class="avatar"><img src="{$avatar}"></div>
+            <h2>{$nick_name}<span>{$age}</span><span class="chat">聊一聊</span> </h2>
+            <p class="distince">500m&nbsp;.&nbsp;下午有空</p>
+            <p class="intro"><span class="userintro">{$user_intro}</span><span class="price">￥{$price}/小时</span></p>
+        </div>
+    </section>
+    <!-- 服务说明 -->
+    <section class="zm_intro">
+        <span>服务说明</span>
+        <p>{$intro}</p>
+    </section>
+    <!-- 服务范围 -->
+    <section class="zm_category">
+        <span>服务范围</span>
+        <div class="list">
+          <?php foreach($category as $k => $v):?>
+            <?php if(in_array($k, $category_id)):?>
+              <span class="border_red">{$v.value}</span>
+            <?php else:?>
+              <span class="border_ccc">{$v.value}</span>
+            <?php endif;?>
+          <?php endforeach;?>
+        </div>
+    </section>
+    <!-- 底部下载 -->
+    <section class="download">
+        <div class='relative'>
+            <a href='javascript:;' class='icon'></a>
+            <section class='intro'>
+                <h3>在吗</h3>
+                <p>更好的线下交友平台APP</p>
+            </section>
+            <a href='javascript:;' class='btn'>免费下载</a>
+        </div>
+    </section>
+</body>
+</html>

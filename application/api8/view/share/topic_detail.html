@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>在吗-活动详情</title>
+<meta name="keywords" content="在吗">
+<meta name="description" content="在吗-服务详情">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, email=no">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="__static__/assets/css/reset.css?t=<?php echo time();?>"/>
+<link rel="stylesheet" href="__static__/assets/css/v2.css?t=<?php echo time();?>"/>
+<script type="text/javascript" src="__static__/assets/js/jquery-3.2.1.min.js?t=<?php echo time();?>"></script>
+<script type="text/javascript" src="__static__/assets/js/app.js?t=<?php echo time();?>"></script>
+</head>
+<body class="topic">
+    <div class="img">
+        <img src="{$logo}">
+        <div class="title">
+            <h2>{$title}</h2>
+            <span>讨论：{$posts_count}</span>
+            <span>阅读：{$view_count}</span>
+        </div>
+    </div>
+    <!-- 动态列表 -->
+    <div class="comments">
+        <!-- <h2>最新</h2> -->
+        <ul>
+        {volist name="comments" id="vo"}
+            <li>
+                <!-- 用户信息 -->
+                <div class="posts_user">
+                    <div><img src="{$vo['created_user']['avatar']}"></div>    
+                    <div>
+                        <span>{$vo['created_user']['nick_name']}</span>
+                        <span>{$vo['created_at']|date='Y-m-d', ###}</span>
+                    </div>
+                    <span class="gz_btn">关注</span>
+                </div>
+                <div class="content">
+                    <p>{$vo['content']} </p>
+                    {volist name="vo['attaches']" id="img"}
+                        <img src="{$img}">
+                    {/volist}
+                </div>
+                <div style="width: 100%;">
+                    <span class="comment_count">{$vo['like_count']}</span>
+                    <span class="like_btn">{$vo['like_count']}</span>
+                </div>
+            </li>
+        {/volist}
+        {empty name="comments"}
+            <li>暂无评论</li>
+        {/empty}
+        </ul>
+    </div>
+    <!-- 间隔 -->
+    <footer></footer>
+    <!-- 底部下载 -->
+    <section class="download">
+        <div class='relative'>
+            <a href='javascript:;' class='icon'></a>
+            <section>
+                <h3>在吗</h3>
+                <p>线下交友APP</p>
+            </section>
+            <a href='javascript:;' class='btn'>免费下载</a>
+        </div>
+    </section>
+    
+</body>
+</html>

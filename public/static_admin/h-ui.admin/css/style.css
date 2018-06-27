@@ -1,0 +1,86 @@
+@charset "utf-8";
+/* 你自己的样式 */
+#verify_img{
+    width: 165px;
+    height: 41px;
+    cursor: pointer;
+}
+/*登录按钮样式*/
+.login_btn, .reset_btn{
+    width: 100px;
+}
+
+/*分页按钮样式*/
+.pagination{
+    margin-top: 20px;
+}
+.pagination li{
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none;
+    color: #666;
+    height: 26px;
+    line-height: 26px;
+    text-decoration: none;
+    margin: 0 0 6px 6px;
+    font-size: 14px;
+}
+.pagination li a{
+    display: inline-block;
+    padding: 0 10px;
+    height: 26px;
+}
+.pagination .active{
+    background: #5a98de;
+    color: #fff;
+    display: inline-block;
+    padding: 0 10px;
+    height: 26px;
+}
+.pagination .disabled{
+    background: #999;
+    color: #fff;
+    display: inline-block;
+    padding: 0 10px;
+    height: 26px;
+}
+/*操作图标样式*/
+.td-manage a{
+    text-decoration: none;
+}
+
+/*权限页面样式*/
+.privilege{
+/*    border:1px solid #ccc;*/
+    margin: 10px;
+}
+.privilege .group{
+    border:1px solid #ccc;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 5px;
+}
+.privilege .license{
+    padding-left: 5px;
+    background-color: #ccc;
+}
+.privilege .object{
+    padding-left: 15px;
+    display: block;
+}
+/*删除按钮*/
+.del{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 20PX;
+    height: 20px;
+    background-color: #ccc;
+    text-align: center;
+    color: white;
+    display: none;
+}
+

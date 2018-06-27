@@ -1,0 +1,139 @@
+{include file='common/header' /}
+<!--_header 作为公共模版分离出去-->
+{include file='common/nav_top' /}
+<!--/_header 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去-->
+{include file='common/menu_left' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<!--/_menu 作为公共模版分离出去-->
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 圈子管理 <span class="c-gray en">&gt;</span> 帖子列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <div>
+            <div class="pd-20">
+                <form method="GET" action="{:url('Circle/lists_posts')}">
+                    <div class="text-c"> 
+                        圈子ID：
+                        <input type="text" name="circle_id" placeholder=" 圈子ID：" style="width:100px" class="input-text">
+                        帖子状态：
+                        <span class="select-box" style="width:100px">
+                            <select class="select" name="is_top" size="1">
+                                <option value="0">全部</option>
+                                <option value="1" {eq name="@$_GET['is_top']" value="1"} selected="selected" {/eq}>精选帖子</option>
+                                <option value="2" {eq name="@$_GET['is_top']" value="2"} selected="selected" {/eq}>普通帖子</option>
+                            </select>
+                        </span>
+                        <button class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+                    </div>
+                </form>
+                <div class="cl pd-5 bg-1 bk-gray mt-20"> 
+                    <span class="l"><a class="btn btn-primary radius" onclick="ads_add()" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 发布帖子</a></span>
+                    <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-c">
+                                <th width="40"><input name="" type="checkbox" value=""></th>
+                                <th width="40">ID</th>
+                                <th width="100">图片</th>
+                                <th width="150">帖子名称</th>
+                                <th width="200">帖子描述</th>
+                                <th width="100">状态</th>
+                                <th width="100">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='lists' id='vo'}
+                            <tr class="text-c va-m">
+                                <td><input name="" type="checkbox" value="{$vo['posts_id']}"></td>
+                                <td>{$vo['posts_id']}</td>
+                                <td class="text-c">
+                                    {php}if($vo['attaches']) echo '<img src="'.$vo['attaches']['0'].'" style="width: 100px;height: 100px;">';{/php}
+                                    
+                                </td>
+                                <td class="text-l">{$vo['title']}</td>
+                                <td class="text-l">{$vo['content']|truncate_utf8_string=###, 60}</td>
+                                <td class="td-status">
+                                    {switch name="$vo['is_top']"}
+                                        {case value="1"}<span class="label label-success radius">精选帖子</span>{/case}
+                                        {case value="2"}<span class="label label-danger radius">普通帖子</span>{/case}
+                                        {default /}
+                                    {/switch}
+                                </td>
+                                <td class="td-manage">
+                                    {eq name="$vo['is_top']" value="1"}<a class="ml-5" onClick="audit({$vo['posts_id']},2)" href="javascript:;" title="取消精选">取消精选</a>{/eq}
+                                    {eq name="$vo['is_top']" value="2"}<a class="ml-5" onClick="audit({$vo['posts_id']},1)" href="javascript:;" title="设为精选">设为精选</a>{/eq}
+                                    <a class="ml-5" onClick="ads_add({$vo['posts_id']})" href="javascript:;" title="编辑">编辑</a>
+                                    <a class="ml-5" onClick="del({$vo['posts_id']})" href="javascript:;" title="删除">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            {empty name="lists"}<tr><td colspan="7" style="text-align: center;">暂无数据</td></tr>{/empty}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script type="text/javascript">
+// 添加编辑 帖子
+var ads_add = function(posts_id){
+    var url = '<?php echo url("Circle/posts_add")?>?posts_id='+posts_id;
+    var index = layer.open({
+        type: 2,
+        title: posts_id ? '编辑帖子':'添加帖子',
+        content: url
+    });
+    layer.full(index);
+}
+// 审核话题
+var audit = function(id, is_top){
+    if(status == 1){
+        var tips = '确定设为精选帖子？';
+    }else{
+        var tips = '确定取消精选帖子？';
+    }
+    layer.confirm(tips, {icon: 3, title:'提示'}, function(index){
+      // 操作按钮
+        ajax({
+            url: "<?php echo url('Circle/is_top');?>", 
+            data: {'id':id, 'is_top':is_top}, 
+            type:'POST',
+            success: function(res){
+                if(res.code == 1){
+                    layer.msg(res.message, {icon:6,time:1000});
+                    location.href = '<?php echo url("Circle/lists_posts");?>?page='+'<?php echo @$_REQUEST["page"]?>';
+                }else{
+                    layer.msg(res.message, {icon:5,time:1000});
+                }
+            }
+        });
+        layer.close(index);
+    });
+}
+// 删除帖子
+var del = function(id){
+    var tips = '确定删除帖子？';
+    layer.confirm(tips, {icon: 3, title:'提示'}, function(index){
+      // 操作按钮
+        ajax({
+            url: "<?php echo url('Circle/is_del');?>", 
+            data: {'id':id}, 
+            type:'POST',
+            success: function(res){
+                if(res.code == 1){
+                    layer.msg(res.message, {icon:6,time:1000});
+                    location.href = '<?php echo url("Circle/lists_posts");?>?page='+'<?php echo @$_REQUEST["page"]?>';
+                }else{
+                    layer.msg(res.message, {icon:5,time:1000});
+                }
+            }
+        });
+        layer.close(index);
+    });
+}
+</script>
+{include file='common/footer' /}

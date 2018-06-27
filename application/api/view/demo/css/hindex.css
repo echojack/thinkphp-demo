@@ -1,0 +1,765 @@
+/*评论s*/
+html{overflow-x: hidden; overflow-y: auto;}
+
+.tc{
+    text-align: center;
+}
+
+.hImgTop{
+	position: relative;
+	height: 5rem;
+	overflow: hidden;
+}
+
+.hImgTop ul{
+	width: 100%;
+}
+.hImgTop ul li{
+	position: relative;
+	float: left;
+	width: 100%;
+}
+.hImgTop ul li img{
+	width: 100%;
+}
+.hImgTop span{
+	position: absolute;
+	right: 0.38rem;
+	bottom: 0.3rem;
+	font-size: 0.34rem;
+	color: #fff;
+    text-shadow: #000 0 1px 0;
+}
+
+.hxq{width: 100%;}
+.hxq .hxqTop, .caseTop{
+	position: relative;
+	border-bottom: 1px solid #ccc;
+}
+
+.hxq .hxqTop{
+	padding: 0.22rem 0.2rem;
+}
+
+.caseTop{
+	margin: 0.22rem 0.2rem;
+}
+
+.hxqTop .hxqL{
+	float: left;
+	width: 1.12rem;
+	height: 1.12rem;
+}
+
+.caseTop .hxqL{
+    display: block;
+	width: 1.12rem;
+	height: 1.12rem;
+    margin: 0.15rem auto;
+}
+
+.hxqTop .hxqL img, .caseTop img{
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	border-radius: 50%;
+}
+.hxqTop .hxqR{
+	float: right;
+	width: 5.8rem;
+}
+.hxqTop .hxqR h2{
+	font-size: 0.3rem;
+	line-height: 0.38rem;
+}
+.hxqTop .hxqR .htime{
+	font-size: 0.2rem;
+	color: #999;
+	line-height: 0.33rem;
+}
+.hxqTop .hxqR .hcon{
+	font-size: 0.3rem;
+	line-height: 0.43rem;
+	color: #000;
+}
+.hxqTop .hxqSc{
+	overflow: hidden;
+	position: absolute;
+	top: 0.3rem;
+	right: 0.2rem;
+	width: 0.25rem;
+	height: 0.34rem;
+	text-indent: -9999px;
+	background: url(../images/hImg.png) no-repeat;
+	background-size: 2rem;
+}
+
+.hxqzan{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	padding: 0 0.2rem;
+	border-bottom: 1px solid #ccc;
+}
+.hxqzan .hxqL{
+	float: left;
+	width: 1.12rem;
+}
+.hxqzan .hxqL i{
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.35rem;
+	background: url(../images/hImg.png) no-repeat -1rem 0;
+	background-size: 2rem;
+}
+.hxqzan .hxqL i.active{
+	background-position: -0.5rem 0;
+}
+.hxqzan .hxqL span{
+	float: right;
+	width: 0.71rem;
+	text-align: center;
+	color: #999;
+	font-size: 0.26rem;
+}
+.hxqzan .hxqC{
+	width: 5.4rem;
+	float: left;
+	overflow:hidden;
+	height: 0.8rem;
+}
+.hxqzan .hxqC img{
+	width: 0.56rem;
+	height: 0.56rem;
+	border-radius: 50%;
+	margin: 0.06rem 0.06rem 0;
+	vertical-align: top;
+}
+.hxqzan .hxqR{
+	display: none;
+	float: right;
+	font-size: 0.15rem;
+	line-height: 1rem;
+}
+.hxqzan .hxqR.active{
+	display: block;
+}
+
+.hxqS .hCell{
+	padding: 0.14rem 0.2rem;
+	border-bottom: 1px solid #ccc;
+}
+.hxqS .hCell .hxqL{
+	float: left;
+	width: 0.91rem;
+	height: 0.91rem;
+	margin-right: 0.38rem;
+}
+.hxqS .hCell .hxqL img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	vertical-align: middle;
+}
+.hxqS .hCell .hxqR{
+	float: left;
+	width: 5.7rem;
+}
+ .hCell .hxqR h2{
+	font-size: 0.24rem;
+	line-height: 0.38rem;
+}
+ .hCell .hxqR .htime{
+	font-size: 0.2rem;
+	color: #999;
+	line-height: 0.33rem;
+}
+.hxqS .hCell .hxqR .hcon{
+	font-size: 0.26rem;
+	line-height: 0.43rem;
+	color: #000;
+}
+.hxqS .hCell .hxqR .hcon .active{
+	color: #666;
+}
+
+
+.hend{
+	font-size: 0.24rem;
+	line-height: 1rem;
+	text-align: center;
+	color: #ccc;
+}
+/*评论e*/
+/*主页s*/
+.hzyTop{width: 100%; height: 4.2rem; position: relative;}
+.hzyTop .hzybg{
+	width: 100%;
+	height: 4.2rem;
+}
+.hzyTop .hzyCon{
+	position: absolute;
+	bottom: 0.18rem;
+	left: 0.2rem;
+	width: 7.1rem;
+	height: 1.8rem;
+}
+.hzyTop .hzyCon .hzyL{
+	float: left;
+	width: 1.8rem;
+	height: 1.8rem;
+}
+.hzyTop .hzyCon .hzyL img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.hzyTop .hzyCon .hzyR{
+	float: right;
+	width: 5rem;
+}
+.hzyTop .hzyCon .hzyR h2{
+	padding-top: 0.6rem;
+	font-size: 0.4rem;
+	line-height: 0.42rem;
+	text-shadow: #000 0 1px 0;
+	color: #fff;
+}
+.hzyTop .hzyCon .hzyR p{
+	font-size: 0.26rem;
+	line-height: 0.4rem;
+	color: #fff;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-shadow: #000 0 3px 0;
+}
+
+.hzyJJ{
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.2rem;
+}
+
+.hzyJJ h2, .h2{
+	font-size: 0.3rem;
+	line-height: 0.6rem;
+	color: #000;
+	text-align: center;
+	font-weight: normal;
+}
+.hzyJJ p, .h2, .p{
+	width: 6.7rem;
+	margin: 0 auto;
+	font-size: 0.3rem;
+	line-height: 0.48rem;
+}
+
+.hzyJJ .hzyJJB{
+	width: 6.7rem;
+	margin: 0 auto;
+	overflow: hidden;
+	padding-top: 0.25rem; 
+}
+
+.hzyJJ ul{
+	width: 7.7rem;
+}
+.hzyJJ ul li{
+	float: left;
+	width: 1.73rem;
+	height: 0.48rem;
+	line-height: 0.38rem;
+	margin-right: 0.68rem;
+	margin-bottom: 0.2rem;
+	border:1px solid #ccc;
+	border-radius: 0.24rem;
+	text-align: center;
+}
+.hzyJJ ul li a{
+	color: #999;
+	font-size: 0.26rem;
+
+}
+.hline{
+	background: #f6f7f7;
+	height: 0.2rem;
+	width: 100%;
+}
+.hzyFw,.hzyAl{
+	border-top: 1px solid #ccc;
+	position: relative;
+}
+.hzyFw h2,.hzyAl h2{
+	height: 0.7rem;
+	line-height: 0.7rem;
+	font-size: 0.28rem;
+	text-indent: 0.2rem;
+	font-weight: normal;
+}
+.hzyFwMore,.hzyAlMore{
+	position: absolute;
+	top: 0.24rem;
+	right: 0.13rem;
+	font-size: 0.26rem;
+	color: #999;
+}
+.hzyFw ul{
+	background-color: #f6f7f7;
+}
+.hzyFw ul li{
+	position: relative;
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin-bottom: 0.1rem;
+}
+.hzyFw ul li:last-child{
+	margin-bottom: 0;
+}
+.hzyFw ul li img{
+	float: left;
+	width: 2.65rem;
+	height: 1.6rem;
+}
+.hzyFw ul li .hzyFwCon{
+	float: right;
+	width: 4.62rem;
+	height: 1.6rem;
+}
+.hzyFw ul li .hzyFwCon h3{
+	font-size: 0.34rem;
+	line-height: 0.94rem;
+	color: #000;
+	font-weight: normal;
+	width: 100%;
+	overflow: hidden;
+}
+.hzyFw ul li .hzyFwCon p{
+	margin-top: 0.1rem;
+	font-size: 0.24rem;
+	line-height: 0.56rem;
+}
+.hzyFw ul li .hzyFwCon span{
+	position: absolute;
+	right: 0;
+	bottom: 0.2rem;
+	width: 1.62rem;
+	height: 0.6rem;
+	padding-right: 0.08rem;
+	background: url(../images/hImg.png) no-repeat 0 -0.5rem;
+	background-size: 2rem;
+	text-align: right;
+	color: #fff;
+	font-size: 0.34rem;
+	line-height: 0.7rem;
+}
+
+.hzyAl ul li{
+	position: relative;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin-bottom: 0.1rem;
+}
+.hzyAl ul li:last-child{
+	margin-bottom: 0;
+}
+
+.hzyAl ul li img{
+	width: 100%;
+	height: 3.7rem;
+}
+.hzyAl .hmask{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(0,0,0,0.3);
+	
+}
+.hzyAl .hmask p{
+	line-height: 0.4rem;
+	color: #fff;
+	text-indent: 0.2rem;
+}
+.hzyAl .hmask p:first-child{
+	font-size: 0.26rem;
+}
+.hzyAl .hmask p .hzyAlT{
+	margin-right: 0.24rem;
+}
+.hzyAl .hmask p:last-child{
+	font-size: 0.3rem;
+}
+.hzyAl .hmask p:last-child .hzyAlT{
+	font-size: 0.24rem;
+}
+/*主页e*/
+/*主页2s*/
+.hzyItem li{
+	position: relative;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin-bottom: 0.2rem;
+	height: 5.04rem;
+}
+.hzyItem .hzyIbg{
+	width: 100%;
+	height: 5.04rem;
+}
+.hzyItem .hmask{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 6.9rem;
+	padding: 0.1rem 0.3rem;
+	line-height: 0.4rem;
+	font-size: 0.3rem;
+	color: #fff;
+	background: rgba(0,0,0,0.3);
+}
+.hzyItem .hzyIMan{
+	position: absolute;
+	top: 0.22rem;
+	left: 0.21rem;
+	width: 80%;
+
+}
+.hzyItem .hzyIMan img{
+	position: relative;
+	width: 0.88rem;
+	height: 0.88rem;
+	border-radius: 50%;
+	z-index: 2;
+}
+
+.hzyItem .hzyIMan span{
+	position: absolute;
+	z-index: 1;
+	top: 0.2rem;
+	left: 0.1rem;
+	padding: 0.1rem;
+	border-radius: 0.1rem;
+	text-indent: 0.85rem;
+	color: #fff;
+	font-size: 0.24rem;
+	background: rgba(0,0,0,0.3);
+}
+.hzyItem .hzyIAdd{
+	position: absolute;
+	top: 0.23rem;
+	right: 0.22rem;
+	width: 50%;
+}
+.hzyItem a{
+	float: right;
+}
+.hzyItem .hzyIAdd2{
+	vertical-align: top;
+	display: inline-block;
+}
+.hzyItem .hzyAddMan{
+	font-size: 0.24rem;
+	color: #fff;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 0.1rem;
+	margin-left: 0.03rem;
+}
+.hzyItem .hzyIAdd1{
+	margin-left: 0.2rem;
+}
+.hzyItem .hzyIAdd3{
+	margin-right: 0.4rem;
+}
+.hzyItem .hzyIAdd1,.hzyItem .hzyIAdd2,.hzyItem .hzyIAdd3{
+	
+	width: 0.5rem;
+	height: 0.5rem;
+	
+	border-radius: 50%;
+	background: rgba(0,0,0,0.3);
+	background-image: url(../images/hImg.png);
+	background-repeat: no-repeat;
+	background-size: 2rem;
+}
+.hzyItem a.hzyIAdd1{
+	background-position: 0.05rem -1.44rem;
+}
+
+.hzyItem .hzyIAdd2{
+	background-position: -0.45rem -1.42rem;
+}
+.hzyItem a.hzyIAdd3{
+	background-position: -0.95rem -1.44rem;
+}
+
+.hzyMoney{
+	position: absolute;
+	top: 1rem;
+	right: 0;
+	width: 1.62rem;
+	height: 0.6rem;
+	padding-right: 0.1rem;
+	line-height: 0.7rem;
+	background:url(../images/hImg.png) no-repeat 0 -0.5rem;
+	background-size: 2rem;
+	color: #fff;
+	font-size: 0.34rem;
+	text-align: right;
+}
+
+.botMoney{
+	top: inherit;
+	bottom: 1rem;
+}
+
+/*主页2e*/
+/*案例详情*/
+.caseTitle h2{
+    font-size: 0.35rem;
+}
+
+.caseTitle p, .p, .hzyJJ .p{
+    font-size: 0.28rem;
+}
+
+.auto{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hzyJJ.casehzyJJ
+{
+    border-bottom: none;
+}   
+
+.imgbox img{
+    width: 100%; 
+    margin: 0.1rem 0;
+}
+
+/* 服务详情*/
+
+.range, .borderline{
+    border-top: 1px solid #ccc;
+}
+
+.rangeul{
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 0.25rem;
+}
+
+.rem2{
+    padding-bottom: 0.2rem;
+}
+
+.range li, .rangedemo{
+    height: 0.8rem;
+    font-size: 0.28rem;
+    overflow: hidden;
+}
+
+.range li{
+	-webkit-transition:height ease .3s;
+}
+
+.range li.active{
+    height: auto;
+    min-height: 0.8rem;
+}
+
+.infobox { 
+    background: #f7f7f7;
+    padding: 0.24rem;
+    border-top: 1px solid #ccc;
+}
+
+.range li .p
+{
+    color: a7a7a7;
+}
+
+.range li{
+    border-top: 1px solid #ccc;
+}
+
+.range li:first-child{
+    border-top: none;
+}
+
+.range .list{
+    float: left;
+    width: 0.5rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background: #ff6699;
+    margin: 0.15rem 0.25rem 0 0.15rem;
+}
+
+.range .listfirst{
+    background-color: #ff6666;
+    background-image: url(../images/hImg2.png);
+    background-repeat: no-repeat;
+    background-size: 2.3rem;
+    background-position: -0.87rem -1.72rem;
+}
+
+.range .centext{
+    float: left;
+    line-height: 0.8rem;
+}
+
+.range .rightV
+{
+    float: right;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.1rem;
+    margin-top: 0.1rem;
+    background-image: url(../images/hImg2.png);
+    background-repeat: no-repeat;
+    background-size: 2.5rem;
+    -webkit-transition:all ease .3s;
+    background-position: -1.74rem -1.84rem;
+}
+  
+.range .active .rightV{
+    -webkit-transform: rotate(180deg);
+    background-position: -1.74rem -1.95rem;
+}
+
+/* footer */
+.footer{
+    width: 100%;
+    font-size: 0.3rem;
+    color: #fff;
+    text-align: center;
+    padding: 0.3rem 0;
+    background-color: #ff6666;
+    z-index: 1;
+}
+
+.jsfooter{
+    display: none;
+}
+
+.botFixed{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.relative
+{
+    position : relative;
+}
+
+.botFixedW{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 1.5rem;
+    z-index: 2;
+    padding-top: 0.2rem;
+}
+
+.botFixedH{
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 1.5rem;
+    padding-top: 0.2rem;
+}
+
+.heart{
+    float: left;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../images/hImg2.png);
+    background-repeat: no-repeat;
+    background-size: 2.3rem;
+    background-position: 0rem 0rem;
+    margin-left: 0.26rem;
+    margin-right: 0.15rem;
+}
+
+.botFixedX{
+    display: block; 
+    width: 0.56rem;
+    height: 0.56rem;
+    position: absolute;
+    top: 0rem;
+    right: 0.15rem;
+    background-image: url(../images/hImg2.png);
+    background-repeat: no-repeat;
+    background-size: 2.5rem;
+    background-position: -0.1rem -1.8rem;
+}
+
+.botFixedW .botInfo
+{
+    float: left;
+    margin-top: 0.1rem;
+    margin-right: 0.3rem;
+}
+
+.botFixedW p, .botFixedW h3{
+    color: #fff;
+    line-height: 0.5rem;
+    text-align: left;
+    font-weight: normal;
+}
+
+.botFixedW h3{
+    font-size: 0.34rem;
+}
+
+.botFixedW p{
+    font-size: 0.25rem;
+}
+
+.download
+{
+    float: left;
+    border-radius: 0.4rem;
+    color: #fff;
+    background-color: #ff6666;
+    font-size: 0.25rem;
+    padding: 0.12rem 0.25rem;
+    margin-top: 0.14rem;
+}
+
+.headimg {
+	background-color: #fff;
+	padding: 0.04rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

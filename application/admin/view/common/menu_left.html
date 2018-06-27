@@ -1,0 +1,38 @@
+<aside class="Hui-aside">
+    <div class="menu_dropdown bk_2">
+        {volist name="menu" id="vo"}
+            <dl {eq name="$controller" value="$vo['controller']"} class="selected"{/eq}>
+                <dt><i class="Hui-iconfont">{$vo['icon']|htmlspecialchars_decode}</i> {$vo['mod_name']}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                    <dd {eq name="$controller" value="$vo['controller']"} style="display: block;"{/eq}>
+                    <ul><?php $children = isset($vo['children']) ? $vo['children'] : [];?>
+                        {volist name="children" id="v"}
+                            {eq name="v['is_show']" value="1"}
+                            <li {eq name="$action" value="$v['license_url']"}  class="current"{/eq}><a href="<?php echo url($v['license_url']);?>" title="{$v['license_name']}">{$v['license_name']}</a></li>
+                            {/eq}
+                        {/volist}
+                    </ul>
+                </dd>
+            </dl>
+        {/volist}
+        
+<!--         <dl id="menu-system">
+            <dt><i class="Hui-iconfont">&#xe60d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('User/admin_lists')}" title="管理员列表">管理员列表</a></li>
+                    <li><a href="{:url('User/user_lists')}" title="web用户列表">web用户列表</a></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl id="menu-system">
+            <dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="{:url('Privilege/license')}" title="权限管理">权限管理</a></li>
+                    <li><a href="{:url('Privilege/object')}" title="栏目管理">栏目管理</a></li>
+                    <li><a href="{:url('Privilege/group')}" title="角色管理">角色管理</a></li>
+                </ul>
+            </dd>
+        </dl> -->
+    </div>
+</aside>

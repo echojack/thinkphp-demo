@@ -1,0 +1,122 @@
+{include file='common/header' /}
+<!--_header 作为公共模版分离出去-->
+{include file='common/nav_top' /}
+<!--/_header 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去-->
+{include file='common/menu_left' /}
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<!--/_menu 作为公共模版分离出去-->
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <div>
+            <div class="pd-20">
+                <div class="text-c"> 日期范围：
+                    <input type="text" onfocus="WdatePicker()" id="logmin" class="input-text Wdate" style="width:120px;">
+                    -
+                    <input type="text" onfocus="WdatePicker()" id="logmax" class="input-text Wdate" style="width:120px;">
+                    <input type="text" name="" id="" placeholder=" 产品名称" style="width:250px" class="input-text">
+                    <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜产品</button>
+                </div>
+                <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a class="btn btn-primary radius" onclick="edit(0, 1)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>{$count}</strong> 条</span> </div>
+                <div class="mt-20">
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-c">
+                                <th width="10"><input name="" type="checkbox" value=""></th>
+                                <th width="40">UID</th>
+                                <th width="60">昵称</th>
+                                <th width="60">账号</th>
+                                <th width="40">角色</th>
+                                <th width="70">注册时间</th>
+                                <th width="70">最后登录时间</th>
+                                <th width="60">最后登录IP</th>
+                                <th width="30">状态</th>
+                                <th width="100">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {volist name='lists' id='vo'}
+                            <tr class="text-c va-m">
+                                <td><input name="" type="checkbox" value="{$vo['uid']}"></td>
+                                <td class="text-l">{$vo['uid']}</td>
+                                <td class="text-l">{$vo['nick_name']}</td>
+                                <td class="text-l">{$vo['login_name']}</td>
+                                <td class="text-l">{$vo['role']}</td>
+                                <td class="text-l">{$vo['created_at']|date="Y-m-d H:i:s",###}</td>
+                                <td class="text-l">{$vo['last_login_time']|date="Y-m-d H:i:s",###}</td>
+                                <td class="text-l">{$vo['last_login_ip']}</td>
+                                <td class="td-status">
+                                    {switch name="$vo['status']"}
+                                        {case value="1"}<span class="label label-success radius">正常</span>{/case}
+                                        {case value="2"}<span class="label label-danger radius">禁用</span>{/case}
+                                        {default /}
+                                    {/switch}
+                                </td>
+                                <td class="td-manage">
+                                    <a class="ml-5" onClick="edit({$vo['uid']}, 1)" href="javascript:;" title="编辑">编辑</a>
+                                    <a class="ml-5" onClick="audit({$vo['uid']}, 2, this)" href="javascript:;" title="取消管理员">取消管理员</a>
+                                    <a class="ml-5" onClick="authority({$vo['uid']})" href="javascript:;" title="分配权限">分配权限</a>
+                                    
+                                </td>
+                            </tr>
+                            {/volist}
+                            {empty name="lists"}<tr><td colspan="6" style="text-align: center;">暂无数据</td></tr>{/empty}
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script type="text/javascript">
+    var edit = function(uid, role){
+        var url = '<?php echo url("User/user_add")?>'+'?uid='+uid+'&role='+role;
+        var index = layer.open({
+            type: 2,
+            title: '用户详情',
+            content: url
+        });
+        layer.full(index);
+    }
+    // 设置用户为管理员
+    var audit = function(uid, is_admin, _this){
+        if(is_admin == 2){
+            var tips = '确认取消用户的管理员权限？';
+        }
+
+        var obj = $(_this);
+        layer.confirm(tips,function(index){
+            ajax({
+                url: "<?php echo url('User/user_admin');?>", 
+                data: {'uid':uid, 'is_admin':is_admin}, 
+                type:'POST',
+                before_text : '审核通过',
+                after_text : '审核中...',
+                success: function(res){
+                    if(res.code == 1){
+                        layer.msg(res.message, {icon:6,time:1000});
+                    }else{
+                        layer.msg(res.message, {icon:5,time:1000});
+                    }
+                    parent.location.href = "<?php echo url('User/admin_lists');?>?page="+'<?php echo @$_REQUEST["page"]?>';
+                    var index = parent.layer.getFrameIndex(window.name);  
+                    parent.layer.close(index); 
+                }
+            }, obj);
+        });
+    }
+    // 分配用户权限列表
+    var authority = function(uid){
+        var url = '<?php echo url("User/privilege")?>'+'?uid='+uid;
+        var index = layer.open({
+            type: 2,
+            title: '分配权限',
+            content: url
+        });
+        layer.full(index);
+    }
+</script>
+{include file='common/footer' /}

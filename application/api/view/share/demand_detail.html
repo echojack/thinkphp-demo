@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>邀约详情</title>
+<meta name="keywords" content="在吗">
+<meta name="description" content="在吗-个人主页">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, email=no">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="__static__/assets/css/reset.css?t=<?php echo time();?>"/>
+<link rel="stylesheet" href="__static__/assets/css/user.css?t=<?php echo time();?>"/>
+</head>
+<body>
+    <!-- 背景 头像 -->
+    <section class="zm_demand">
+        <img class="bg" src="{$attaches['0']}">
+        <div class="avatar">
+            <img src="{$avatar}" />
+        </div>
+        <h2>{$nick_name}<span>{$age}</span></h2>
+        <p class="intro">{$intro}</p>
+    </section>
+    <!-- 标题 -->
+    <section class="zm_title">
+        <h2> <img src="{$category_icon}" class="demand_icon">{$title}</h2>
+        <ul class='detail'>
+            <li>
+                {$intro}
+            </li>
+            <li><span>对象：</span><?php if($gender == 1) {echo '仅限男士';} elseif ($gender ==2) echo "仅限女士"; else '男女不限';?></li>
+            <li><span>买单：</span>
+                <?php if($pay_way == 1) echo 'AA制'; elseif ($pay_way ==2) echo "我买单"; else '你买单';?>
+            </li>
+            <li><span>时间：</span>
+                <?php echo date("Y-m-h", $date_time);?>
+            </li>
+            <li><span>地点：</span>
+                {$address}
+            </li>
+            <li><span class="price">打赏：￥{$price}</span></li>
+        </ul>
+    </section>
+    <!-- 底部下载 -->
+    <section class="download">
+        <div class='relative'>
+            <a href='javascript:;' class='icon'></a>
+            <section class='intro'>
+                <h3>在吗</h3>
+                <p>更好的线下交友平台APP</p>
+            </section>
+            <a href='javascript:;' class='btn'>免费下载</a>
+        </div>
+    </section>
+</body>
+</html>
